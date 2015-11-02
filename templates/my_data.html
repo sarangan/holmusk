@@ -1,0 +1,67 @@
+<div class="row">
+			<div class="widget__content" >
+				<div class="col-md-12">
+						<article class="widget">
+							<header class="widget__header">
+								<div class="widget__title">
+									<i class="pe-7s-display2"></i><h3>Food diary</h3>
+								</div>
+							</header>
+							
+							<div class="widget__content filled table-responsive pad20">
+								
+										
+								<table class="table  media-table">
+							  	<thead>
+							  		<tr>
+							  			<th>Food Item</th>
+							  			<th class="text-center" width="100">Date</th>
+							  			<th class="text-center">Meal</th>
+							  			<th class="text-center">Amount</th>
+							  			<th class="text-center">Status</th>
+							  			<th class="text-center">Action</th>
+							  		</tr>
+							  	</thead>
+							  	<tbody>
+							  		
+							  		<tr ng-repeat="data in myData">
+							  			<td>
+							  				{{data.description}}
+							  			</td>
+							  			<td>
+							  				{{data.date}}
+							  			</td>
+							  			<td>
+							  				{{data.meal}}
+							  			</td>
+							  			<td>
+							  				{{data.amount}} {{data.unit}}
+							  			</td>
+							  			<td>
+							  				<div class="stat-circle" style="max-width:50px; height:auto;">
+												<h3>45%</h3>
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 92">
+													<circle style="opacity:0.16;fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;" cx="46" cy="46" r="45"></circle>
+													<path style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;" d="M84.839,68.718C88.749,62.049,91,54.289,91,46C91,21.147,70.853,1,46,1"></path>
+												</svg>
+											</div>
+							  			</td>
+							  			<td>
+							  				<button class="btn blue fixed" disabled>Pending</button>
+							  			</td>
+							  		</tr>	
+
+							  		
+							  	
+
+							  	</tbody>
+								</table>
+								
+								
+							</div> <!-- /widget__content -->
+
+						</article><!-- /widget -->
+					</div>
+			</div>
+
+</div>

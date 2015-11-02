@@ -1,0 +1,54 @@
+<header class="main-header">
+	<div class="main-header__nav">
+		<h1 class="main-header__title">
+			<i class="fa fa-search"></i>
+			<span>Search</span>
+		</h1>
+		<ul class="main-header__breadcrumb">
+			<li><a href="#home">Home</a></li>
+			<li class="active"><a href="#" onclick="return false;">Search result</a></li>
+		</ul>
+	</div>
+	
+</header> <!-- /main-header -->
+
+<div class="row" ng-controller="searchCrtl as search">
+	<div class="col-md-12">
+
+		<article class="widget widget__form">
+			<header class="widget__header">
+				<div class="widget__title">
+					<i class="fa fa-filter"></i><h3> {{searchData.length}} results</h3>
+				</div>
+			</header>
+
+			<div class="widget__content filled">
+				
+				<input type="text" placeholder="Filter..." ng-model="filter_food" >
+
+				<div class="media message" ng-repeat="item in searchData | filter: filter_food">
+					<figure class="pull-left rounded-image message__img">
+						<img class="media-object" src="res/images/search_item.png" alt="user">
+					</figure>
+
+					<div class="media-body" ng-controller="foodSearchCrtl as fsearch" >
+						<a ng-click="fsearch.searchFood(item)" class="search-item"><h4 class="media-heading message__heading">{{item.name}}</h4></a>
+						<p class="message__msg">{{item.brand_name}}  
+							<span ng-repeat="details in item.portions | limitTo : 5">{{details.name}} - Calories: {{details.nutrients.important.calories.value}} {{details.nutrients.important.calories.unit}} | 
+							Fat : {{details.nutrients.important.total_fats.value}} {{details.nutrients.important.total_fats.unit}} | 
+							Carbs : {{details.nutrients.important.total_carbs.value}} {{details.nutrients.important.total_carbs.unit}} | 
+							Prot : {{details.nutrients.important.protein.value}} {{details.nutrients.important.protein.unit}}  
+							</span>
+						</p>
+					</div>
+				</div>
+
+				
+
+			</div>
+
+		</article>
+
+	</div>
+
+</div>

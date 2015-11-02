@@ -1,0 +1,344 @@
+<div ng-controller="resultCrtl as result">
+
+	<header class="main-header">
+
+		<div class="main-header__nav">
+			<h1 class="main-header__title">
+				<i class="fa fa-cutlery"></i>
+				<span>{{food_name}}</span>
+			</h1>
+			<ul class="main-header__breadcrumb">
+				<li><a href="#home">Home</a></li>
+				<li><a href="#search">Search</a></li>
+				<li class="active"><a href="#" onclick="return false;">{{food_name}}</a></li>
+			</ul>
+		</div>
+	
+	</header> <!-- /main-header -->
+
+
+	<div class="row">
+
+		<div class="col-md-8">
+			<article class="widget">
+				<header class="widget__header one-btn">
+					<div class="widget__title">
+						<i class="fa fa-heartbeat"></i><h3 data-toggle="tooltip" data-original-title="{{portion_des.name}}">{{portion_des.name}}</h3>
+					</div>						
+				</header>
+				
+				<div class="widget__content">
+
+					<div class="members__controls">
+						<div class="members__controls--total">
+							<div class="dropdown">
+									<button class="btn btn-block blue dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
+								    Common serving sizes
+								    <span class="caret">
+								    	<i class="fa fa-chevron-down"></i>
+								    </span>
+								  </button>
+								  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" >
+								    <li role="presentation" ng-repeat="portion in portions"><a role="menuitem" tabindex="-1" ng-click="loadData($index)">{{portion.name}}</a></li>									    
+								  </ul>
+							</div>
+						</div>						
+					</div>
+
+					<div class="clearfix"></div>
+					
+					<div class="members__container">
+
+						<div class="media message checked">
+							<figure class="pull-left rounded-image message__img">
+								<img class="media-object" src="res/images/important.png" alt="user" style="width:48px; height:auto;">
+							</figure>
+							<div class="media-body">
+								<h4 class="media-heading message__heading">Important Nutrients</h4>
+								<p class="message__location">										
+								</p>
+
+								<input type="checkbox" class="btn-more-check" id="more_{{portion_des.$$hashKey}}">
+								<label class="c-btn--more" for="more_{{portion_des.$$hashKey}}"></label>
+
+								<div class="message__details">
+									<table>
+										<tbody>
+											<tr ng-repeat="(key,val) in portion_des.nutrients.important">
+												<td>{{key}} :</td>
+												<td>{{val.value}} {{val.unit}}</td>
+											</tr>											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="media message checked" ng-show="isEmpty(portion_des.nutrients.extra)">
+							<figure class="pull-left rounded-image message__img">
+								<img class="media-object" src="res/images/extra.png" alt="user" style="width:48px; height:auto;">
+							</figure>
+							<div class="media-body">
+								<h4 class="media-heading message__heading">Extra Nutrients</h4>
+								<p class="message__location">
+								</p>
+
+								<input type="checkbox" class="btn-more-check" id="more2_{{portion_des.$$hashKey}}" >
+								<label class="c-btn--more" for="more2_{{portion_des.$$hashKey}}"></label>
+
+								<div class="message__details">
+									<table>
+										<tbody>
+
+										<tr ng-repeat="(key,val) in portion_des.nutrients.extra">
+												<td>{{key}} :</td>
+												<td>{{val.value}} {{val.unit}}</td>
+										</tr>
+									</tbody></table>
+								</div>
+							</div>
+						</div>
+						<hr/>
+						<form name="frmAddNewItem" novalidate ng-submit="frmAddNewItem.$valid && result.save(result.newItem)">
+
+							<div class="media message checked">
+								<figure class="pull-left rounded-image message__img">
+									<img class="media-object" src="res/images/form_img.png" alt="user" style="width:48px; height:auto;">
+								</figure>
+								<div class="media-body">
+									<h4 class="media-heading message__heading">Add this item to my food diary {{statustxt}}</h4>
+									<p class="message__location" ng-hide="frmAddNewItem.$valid" style="color:#f35958;">
+										Please fill all the fileds
+									</p>
+								</div>
+							</div>
+
+							<!-- saving to my diary -->
+							<div class="members__controls">
+
+								<div class="widget__form">
+									
+										<div class="members__controls">									
+											<div class="members__controls--order custom-dropdown">
+												<select class="dropdown-select" ng-model="result.newItem.date" required>
+													<option value="" style="color:black;">Select Date</option>
+													<option ng-repeat="d in dates" value="{{d.value | date:'dd/MM/yyyy' }}" style="color:black;">{{d.text}} - {{d.value | date:'dd/MM/yyyy'}}</option>
+												</select>
+											</div>
+										</div>
+										<div class="members__controls">									
+											<div class="members__controls--order custom-dropdown">
+												<select class="dropdown-select" ng-model="result.newItem.meal" required>
+													<option value="" style="color:black;">Select Meal</option>
+													<option value="Breakfast"  style="color:black;">Breakfast</option>
+													<option value="Lunch"  style="color:black;">Lunch</option>
+													<option value="Dinner"  style="color:black;">Dinner</option>
+													<option value="Snacks"  style="color:black;">Snacks</option>
+												</select>
+											</div>
+										</div>
+										<input type="text" placeholder="Description" ng-model="result.newItem.description" required>
+										<div class="members__controls">
+											<input type="text" placeholder="Amount" style="width:50%; float:left; height:64px;" ng-model="result.newItem.amount" required>							
+											<div class="members__controls--order custom-dropdown" style="width:50%; margin-left: 0px;" >
+												<select class="dropdown-select" ng-model="result.newItem.unit" required>
+													<option value="" style="color:black;">Unit </option>
+													<option value="cup"  style="color:black;">cup</option>
+													<option value="oz"  style="color:black;">oz</option>
+													<option value="g"  style="color:black;">g</option>
+												</select>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<button type="submit">Save</button>
+								</div>
+							</div> <!-- /form block -->
+						</form>						
+
+					</div>
+
+				</div> <!-- /widget__content -->
+
+			</article><!-- /widget -->
+		</div>
+
+
+		<div class="col-md-4">
+
+			<article class="widget">
+				<header class="widget__header">
+					<div class="widget__title">
+						<i class="fa fa-bar-chart"></i><h3>Calorie Breakdown</h3>
+					</div>
+					
+				</header>
+
+				<div class="widget__content filled" style="padding-top :20px;">
+					<canvas id="pie" class="chart chart-pie" data="calories_data" labels="calories_labels"></canvas>
+				</div>
+
+				<div class="widget__content filled">
+					
+					<div class="row">
+						<div class="col-md-4 col-sm-4 col-xs-4 mini-stats">
+							<div class="pie-small" style="border-color:#97BBCD;"></div>
+							<p>
+								<span>{{calories_data[0]}}%</span><br>
+								Carbohydrate
+							</p>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4 mini-stats">
+							<div class="pie-small" style="border-color:#DCDCDC;"></div>
+							<p>
+								<span>{{calories_data[1]}}%</span><br>
+								Fat
+							</p>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4 mini-stats">
+							<div class="pie-small" style="border-color:#F7464A;"></div>
+							<p>
+								<span>{{calories_data[2]}}%</span><br>
+								Protein
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="widget__content filled">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12 mini-stats">
+							<span>Nutritional Summary</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-3 col-xs-3 mini-stats">
+							
+							<p>
+								<span>{{portion_des.nutrients.important.calories.value}} {{portion_des.nutrients.important.calories.unit }}</span><br>
+								Calories
+							</p>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-3 mini-stats">
+							
+							<p>
+								<span>{{portion_des.nutrients.important.total_fats.value}} {{portion_des.nutrients.important.total_fats.unit }}</span><br>
+								Fat
+							</p>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-3 mini-stats">
+							
+							<p>
+								<span>{{portion_des.nutrients.important.total_carbs.value}} {{portion_des.nutrients.important.total_carbs.unit }}</span><br>
+								Carbs
+							</p>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-3 mini-stats">
+							
+							<p>
+								<span>{{portion_des.nutrients.important.protein.value}} {{portion_des.nutrients.important.protein.unit }}</span><br>
+								Prot
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</article><!-- /widget -->
+
+		</div>
+
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<article class="widget">
+				<header class="widget__header">
+					<div class="widget__title">
+						<i class="fa fa-bar-chart"></i><h3>Statistics</h3>
+
+					</div>					
+				</header>
+
+				<div class="widget__content filled">
+					<p class="graph-number"><span>{{portion_des.nutrients.important.calories.value}} {{portion_des.nutrients.important.calories.unit }}</span> Calories</p>
+					
+						<canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+
+				</div>
+			</article><!-- /widget -->
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			<article class="widget">
+				<header class="widget__header">
+					<div class="widget__title">
+						<i class="fa fa-picture-o"></i><h3>Photos</h3>
+						<span style="font-size:10px;">- Flicker</span>
+					</div>
+					
+				</header>
+
+				<div class="widget__content filled">
+					
+					<div class="row">
+
+						<div class="flicker-photos gallery">
+						    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 " ng-hide="loading" ng-repeat="photo in photos.items | limitTo : 30">
+						    	<a class="magnific-image-link" href="{{photo.media.m}}"><img class="flickr-photo" ng-src="{{ photo.media.m }}"></a>
+						    </div>
+						</div>
+
+					</div>
+					
+
+				</div>
+			</article><!-- /widget -->
+		</div>
+
+		<div class="col-md-7">
+			<article class="widget">
+				<header class="widget__header">
+					<div class="widget__title">
+						<i class="fa fa-magnet"></i><h3>Related Food Items</h3>
+					</div>
+					
+				</header>
+
+				<div class="widget__content filled">
+					
+					<div class="media message" ng-repeat="item in relatedFoodItems | limitTo: 3">
+						<figure class="pull-left rounded-image message__img">
+							<img class="media-object" src="res/images/search_item.png" alt="user">
+						</figure>
+
+						<div class="media-body" ng-controller="foodSearchCrtl as fsearch" >
+							<a ng-click="fsearch.searchFood(item)" class="search-item"><h4 class="media-heading message__heading">{{item.name}}</h4></a>
+							<p class="message__msg">{{item.brand_name}}  
+								<span ng-repeat="details in item.portions | limitTo : 2">{{details.name}} - Calories: {{details.nutrients.important.calories.value}} {{details.nutrients.important.calories.unit}} | 
+								Fat : {{details.nutrients.important.total_fats.value}} {{details.nutrients.important.total_fats.unit}} | 
+								Carbs : {{details.nutrients.important.total_carbs.value}} {{details.nutrients.important.total_carbs.unit}} | 
+								Prot : {{details.nutrients.important.protein.value}} {{details.nutrients.important.protein.unit}}  
+								</span>
+							</p>
+						</div>
+					</div>
+
+					
+					
+
+				</div>
+			</article><!-- /widget -->
+		</div>
+
+
+	</div>
+
+
+	<modal visible="showModal">
+      	Successfull saved...
+  	</modal>
+
+</div>

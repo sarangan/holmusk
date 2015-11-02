@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Holmusk</title>
+
+	<link rel="stylesheet" href="res/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="res/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="res/bower_components/angular-chart.js/dist/angular-chart.css">
+	<link href="res/bower_components/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="res/css/style.css">
+	
+	<!--jquery plugins -->
+	<script type="text/javascript" src="res/bower_components/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="res/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="res/bower_components/Chart.js/Chart.min.js"></script>
+	<script type="text/javascript" src="res/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+
+	<!--angular plg -->
+	<script type="text/javascript" src="res/bower_components/angular/angular.min.js"></script>
+	<script  type="text/javascript" src="res/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+	<script  type="text/javascript" src="res/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>	
+	<script type="text/javascript" src="res/bower_components/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="res/bower_components/angular-resource/angular-resource.min.js"></script>
+	<script type="text/javascript" src="res/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script type="text/javascript" src="res/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script type="text/javascript" src="res/bower_components/ngstorage/ngStorage.min.js"></script>
+
+	<script type="text/javascript" src="res/js/typeahead.bundle.js"></script>
+    <script type="text/javascript" src="res/js/bloodhound.js"></script>
+    <script type="text/javascript" src="res/js/angular-typeahead.js"></script>
+
+	<script type="text/javascript" src="res/js/app.js"></script>
+
+</head>
+<body ng-app="foodApp">
+
+	<header class="top-bar" >
+		<ul class="profile"> 
+		
+			<li class="mobile-nav">
+				<a href="#" onclick="return false;" class="btn-circle btn-sm">
+					<i class="fa fa-bars"></i>
+				</a>
+			</li>
+		</ul>
+
+		<div class="main-search" ng-controller="foodSearchCrtl as fsearch">
+			<input type="text" placeholder="Food search ..." id="msearch"   class='typeahead' sf-typeahead options="FoodSearchOptions" datasets="foodDataset" ng-model="selectedFood" ng-enter="fsearch.searchFood(selectedFood)">
+
+			<label for="msearch">
+				<i class="fa fa-search"></i>
+			</label>
+			<button ng-click="fsearch.searchFood(selectedFood)">
+				<i class="fa fa-arrow-circle-o-right"></i>
+			</button>
+		</div>
+
+		<div class="main-brand">
+			<div class="main-brand__container">
+				<div class="main-logo"><img src="res/images/logo.png"></div>
+			</div>
+		</div>
+
+	</header><!-- /top-bar -->
+
+
+	<div class="wrapper">
+
+		<aside class="sidebar" ng-include="'templates/sidebar.html'">
+		</aside> <!-- /sidebar -->
+		
+		<section class="content">
+
+			<div class="row">
+				<div class="widget__content" >
+					<div class="col-md-12">
+
+						<div class="main-search-mb" ng-controller="foodSearchCrtl as fsearch">
+							<input type="text" placeholder="Food search ..." id="msearch"   class='typeahead' sf-typeahead options="FoodSearchOptions" datasets="foodDataset" ng-model="selectedFood" ng-enter="fsearch.searchFood(selectedFood)">
+
+							<label for="msearch">
+								<i class="fa fa-search"></i>
+							</label>
+							<button ng-click="fsearch.searchFood(selectedFood)">
+								<i class="fa fa-arrow-circle-o-right"></i>
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<ng-view></ng-view>
+
+			<footer class="footer-brand" ng-include="'templates/footer.html'">
+			</footer>
+
+		</section> <!-- /content -->
+
+	</div>
+
+	<script type="text/javascript" src="res/js/script.js"></script>
+</body>
+</html>
