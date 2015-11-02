@@ -1,0 +1,77 @@
+#tools-main-container {
+  padding-top: 20px;
+}
+
+#tools-menu {
+  width: 240px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  top: 52px;
+  background-color: #1D3558;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.dropdown-toggle {
+  color: #FFFFFF;
+}
+
+li.selected > .dropdown-toggle {
+  color: #1B4079;
+}
+
+li.selected {
+  text-decoration: none;
+  background-color: #EEE;
+  border-bottom: 1px solid white;
+}
+
+li.not-selected {
+  text-decoration: none;
+  background-color: #1D3558;
+  border-bottom: 1px solid white;
+}
+
+#tools-main-menu {
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+#tools-main-content {
+  margin-left: 240px;
+  position: fixed;
+}
+
+#tools-main-container {
+  margin-left: 30px;
+}
+
+.tools-menu-text {
+  margin-left: 10px;
+}
+
+.tools-menu-text.second-level {
+  margin-left: 30px;
+}
+
+.sidebar {
+    width: 240px;
+    overflow-y: auto;
+    float: left;
+    margin-left: -30px;
+    position: fixed;
+}
+
+.fa.arrow {
+  right: 20px;
+  position: absolute;
+}
+
+.fa.arrow:before {
+  content: "\f104";
+}
+
+.active > a > .fa.arrow:before {
+  content: "\f107";
+}

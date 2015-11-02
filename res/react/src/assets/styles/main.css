@@ -1,0 +1,57 @@
+/* Main.css */
+body {
+	font-family: 'Open Sans', sans-serif;
+  min-width: 320px;
+  font-weight: 300;
+	font-size: 16px;
+}
+
+html, body, #app, #tools {
+	height: 100%;
+}
+
+li {
+	cursor: pointer; cursor: hand;
+}
+
+#login-form {
+	margin-top: 20px;
+}
+
+#nav-logo {
+  height: 100%;
+}
+.navbar {
+  background: #1B4079;
+  border: none;
+	margin-bottom: 0px;
+}
+.navbar-nav>li>a {
+  color: white;
+  font-size: 16px;
+  margin-top: 2px;
+}
+.navbar-nav>li>a:hover, .navbar-nav>li>a:focus {
+  background: rgb(51, 103, 184);
+}
+
+/*To be fixed*/
+#rating-wrapper {
+  position: relative;
+}
+#rating {
+  background-color: grey;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.alert-wrapper {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  z-index:10;
+}
+
+#navbar.ng-hide {
+  display: none !important;
+}

@@ -1,0 +1,22 @@
+'use strict';
+
+var GenericConstants = require('../constants/GenericConstants');
+
+var API_URL = GenericConstants.API_URL;
+
+var MealDetailsConstants = {
+  GET_MEAL_URL: API_URL + 'meal',
+  SET_MEAL: 'SET_MEAL',
+  ADD_FOOD: 'ADD_FOOD',
+  DELETE_FOOD: 'DELETE_FOOD',
+  UPDATE_ADDED_FOOD: 'UPDATE_ADDED_FOOD',
+  UPDATE_ADDED_FOODS: 'UPDATE_ADDED_FOODS',
+  UPDATE_HOVER_RATING: 'UPDATE_HOVER_RATING',
+  UPDATE_RATING: 'UPDATE_RATING',
+  UPDATE_NUTRIENT: 'UPDATE_NUTRIENT',
+  UPDATE_FRUIT_SERVINGS: 'UPDATE_FRUIT_SERVINGS',
+  UPDATE_VEG_SERVINGS: 'UPDATE_VEG_SERVINGS',
+  NUM_STARS: 5
+}
+
+module.exports = MealDetailsConstants;
